@@ -16,8 +16,8 @@ const Home = async () => {
 
   console.log("The netflix originals array: " + netflixOriginals);
   return (
-    <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
-      <h1></h1>
+    <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh] overflow-hidden">
+      
       <Header />
       <main>
         <Banner netflixOriginals={netflixOriginals} />
