@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { SearchIcon, BellIcon } from "@heroicons/react/solid";
 import Link from "next/link";
+import useAuth from "@/hooks/useAuth";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,6 +23,7 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const {logout} = useAuth()
   return (
     <header className={`${isScrolled && 'bg-[#141414]'} overflow-hidden`}>
       <div className="flex items-center space-x-2 md:space-x-10">
@@ -46,7 +48,7 @@ const Header = () => {
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
         <Link href="/accounts">
-          <img
+          <img onClick={logout}
             src="https://rb.gy/g1pwyx"
             alt=""
             className="cursor-pointer rounded"

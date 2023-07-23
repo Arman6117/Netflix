@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/hooks/useAuth";
 import "./globals.css";
 
 export const metadata = {
@@ -9,9 +10,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+    <AuthProvider>
       <body>
         <main>{children}</main>
       </body>
+    </AuthProvider>
     </html>
   );
 }
