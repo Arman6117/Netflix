@@ -4,15 +4,20 @@ import { InformationCircleIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
+import { useStore } from "@/src/store";
 
 const Banner = ({ netflixOriginals }) => {
   const [movie, setMovie] = useState(null);
-
+  const setModal = useStore((state) => state.setModal);
+  const movieState = useStore((state) => state.currentMovie);
+  const setCurrentMovie = useStore((state) => state.setCurrentMovie);
   useEffect(() => {
     setMovie(
       netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)]
     );
   }, [netflixOriginals]);
+
+
 
   // console.log(movie);
   return (
@@ -33,11 +38,19 @@ const Banner = ({ netflixOriginals }) => {
       </p>
       <div className="flex space-x-3">
         <button className="banner_button bg-white text-black">
-          
           <FaPlay className="h-4 text-black  md:h-7 md:w-7" />
           Play
         </button>
-        <button className="banner_button bg-[gray]/70">More Info <InformationCircleIcon className="h-5 w-5 md:h-8 md:w-8"/> </button>
+        <button
+          className="banner_button bg-[gray]/70"
+          onClick={() => {
+            setModal(true);
+
+            setCurrentMovie(movie);
+          }}
+        >
+          More Info <InformationCircleIcon className="h-5 w-5 md:h-8 md:w-8" />{" "}
+        </button>
       </div>
     </div>
   );
