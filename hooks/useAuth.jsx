@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
         password
       );
       setUser(userCredentials.user);
-      router.push("/");
+      router.push("/plans");
       setLoading(false);
     } catch (error) {
       alert(error.message);

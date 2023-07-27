@@ -7,6 +7,9 @@ import Table from "./Table";
 import Loader from "./Loader";
 import { createCustomer } from "@/api";
 import { useStore } from "@/src/store";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
 const products = [
   {
     id: 0,
@@ -35,24 +38,60 @@ const products = [
 ];
 const Plans = () => {
   const { logout, user } = useAuth();
+  const [emailState, setEmailState] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(products[2]);
   const [isBillingLoading, setIsBillingLoading] = useState(false);
   const setSubscription = useStore((state)=>state.setSubscription)
+  const setPlan = useStore((state)=>state.setPlan)
+  const subState = useStore((state)=>state.setSubscription)
+  const router = useRouter()
   const subscribeToPlan = async () => {
-    if (!user) return;
+    if (!user || !selectedPlan) return;
+
     const email = user.reloadUserInfo.email;
     setIsBillingLoading(true);
+
     try {
       await createCustomer(email, selectedPlan);
       setIsBillingLoading(false);
-      if(user && !setIsBillingLoading ){
-        setSubscription(true)
-      }
+      setSubscription(true);
+      setPlan({name:selectedPlan.name,price:selectedPlan.price,resolution:selectedPlan.resolution,})
+      router.push('/');
     } catch (error) {
       console.log(error.message);
-      setIsBillingLoading(false)
+      setIsBillingLoading(false);
     }
   };
+  const checkEmailExists = async () => {
+    if (user) {
+      const customerCollectionRef = collection(db, "Customers");
+      const userEmail = user.reloadUserInfo.email;
+
+      // Query to check if user email is already in the customers collection
+      const queryToCheck = query(
+        customerCollectionRef,
+        where("email", "==", userEmail)
+      );
+
+      try {
+        const querySnapshot = await getDocs(queryToCheck);
+        setEmailState(!querySnapshot.empty);
+
+        if (!querySnapshot.empty) {
+          // Redirect to the homepage if the email exists
+          router.push("/");
+        }
+        else {
+          return 
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  }
+  useEffect(()=>{
+    checkEmailExists();
+  },[user,subState])
   return (
     <div>
       <header className="border-b border-white/10 bg-[#141414]">

@@ -4,14 +4,12 @@ import Header from "@/components/Header";
 import Row from "@/components/Row";
 import requests from "@/utils/requests";
 import Head from "next/head";
-import ModalWrapper from "@/components/Wrappers/ModalWrapper";
-import Plans from "@/components/Plans";
-import { useStore } from "@/src/store";
-import PlansWrapper from "@/components/Wrappers/PlansWrapper";
-
+import ModalWrapper from "@/components/Wrappers/ModalWrapper"
 
 
 const Home = async () => {
+  
+  
   const {
     netflixOriginals,
     trendingNow,
@@ -23,10 +21,10 @@ const Home = async () => {
     documentaries,
   } = await getMoviesAndShows();
 
-  
- <PlansWrapper/>
 
   return (
+    <>
+    
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh] ">
       <div>
         <Head>
@@ -50,6 +48,7 @@ const Home = async () => {
       </main>
       <ModalWrapper />
     </div>
+    </>
   );
 };
 
