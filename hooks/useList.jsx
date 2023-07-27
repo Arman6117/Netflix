@@ -3,7 +3,7 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
 
-function useList ({email}) {
+function useList (email) {
     const [list,setList] = useState([]);
     useEffect(()=>{
      if(!email) return
