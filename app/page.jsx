@@ -5,6 +5,7 @@ import Row from "@/components/Row";
 import requests from "@/utils/requests";
 import Head from "next/head";
 import ModalWrapper from "@/components/Wrappers/ModalWrapper"
+import ListWrapper from "@/components/Wrappers/ListWrapper";
 
 
 const Home = async () => {
@@ -39,7 +40,7 @@ const Home = async () => {
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
           {/* My List Component */}
-          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
+        <ListWrapper />
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />

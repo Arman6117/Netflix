@@ -10,6 +10,7 @@ import { useStore } from "@/src/store";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "@/firebase";
 const products = [
   {
     id: 0,
