@@ -9,7 +9,6 @@ import { useStore } from "@/src/store";
 const Banner = ({ netflixOriginals }) => {
   const [movie, setMovie] = useState(null);
   const setModal = useStore((state) => state.setModal);
-  const movieState = useStore((state) => state.currentMovie);
   const setCurrentMovie = useStore((state) => state.setCurrentMovie);
   useEffect(() => {
     setMovie(

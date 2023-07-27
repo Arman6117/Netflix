@@ -123,11 +123,11 @@ const Modal = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="text-[gray]">Original language: {' '}</span>
+                  <span className="text-[gray]">Original language: </span>
                   {movie?.original_language}
                 </div>
-                <div >
-                <span className="text-[gray]">Total votes: {' '}</span>
+                <div>
+                  <span className="text-[gray]">Total votes: </span>
                   {movie?.vote_count}
                 </div>
               </div>
